@@ -73,7 +73,7 @@ prior_adjusted_non_targets = (1-prior)/prop_non_targets;
 
 weights = [prior_adjusted_targets*ones(1,nt), prior_adjusted_targets*robust_weight_targets*ones(1,nn), prior_adjusted_non_targets*ones(1,nn), prior_adjusted_non_targets*robust_weight_non_targets*ones(1,nt)];
 
-offset = mnrfit(prior)*[ones(1,ntnn),-ones(1,ntnn)];
+offset = log(prior/(1-prior))*[ones(1,ntnn),-ones(1,ntnn)];
 
 
 
