@@ -75,7 +75,7 @@ if nargin > 0 && nargin < 4
     error('Incorrect number of input arguments for function: likelihood_ratio = multivar_kernel_LR(suspect_data, offender_data, background_data, background_index)')
 elseif nargin == 0
     disp('Running test data on function: likelihood_ratio = multivar_kernel_LR(suspect_data, offender_data, background_data, background_index)')
-    background_index=[1 1 1 2 2 2 3 3 3 4 4 4]
+    background_index=[1 1 1 2 2 2 3 3 3 4 4 4];
     background_data=[10 21 30
                      11 20 31
                      12 22 32
@@ -87,22 +87,22 @@ elseif nargin == 0
                      16 26 36
                      16 26 36
                      17 27 37
-                     18 28 38]
+                     18 28 38];
     suspect_data=[11 21 31
                   12 22 32
-                  13 23 33]
+                  13 23 33];
 
     disp('offender_data=suspect_data+.1')
-    offender_data=suspect_data+.1
-    LR = two_level_multivar_LR(suspect_data, offender_data, background_data, background_index)
+    offender_data=suspect_data+.1;
+    LR = multivar_kernel_LR(suspect_data, offender_data, background_data, background_index)
 
     disp('offender_data=suspect_data+1')
-    offender_data=suspect_data+1
-    LR = two_level_multivar_LR(suspect_data, offender_data, background_data, background_index)
+    offender_data=suspect_data+1;
+    LR = multivar_kernel_LR(suspect_data, offender_data, background_data, background_index)
 
     disp('offender_data=suspect_data+5')
-    offender_data=suspect_data+5
-    LR = two_level_multivar_LR(suspect_data, offender_data, background_data, background_index)
+    offender_data=suspect_data+5;
+    LR = multivar_kernel_LR(suspect_data, offender_data, background_data, background_index)
     return
 end
 
