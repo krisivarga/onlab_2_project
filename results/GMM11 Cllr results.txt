@@ -1,0 +1,13 @@
+GMM11 Cllr results
+aI
+Cllr_raw: 0.614	 Cllr_cal: 0.455	 Cllr_min_raw: 0.358	 Cllr_min_cal: 0.377	 best_num_iter: 7
+eI
+Cllr_raw: 0.674	 Cllr_cal: 0.372	 Cllr_min_raw: 0.252	 Cllr_min_cal: 0.260	 best_num_iter: 7
+oU
+Cllr_raw: 0.641	 Cllr_cal: 0.326	 Cllr_min_raw: 0.212	 Cllr_min_cal: 0.221	 best_num_iter: 6
+aU
+Cllr_raw: 0.668	 Cllr_cal: 0.494	 Cllr_min_raw: 0.380	 Cllr_min_cal: 0.413	 best_num_iter: 9
+OI
+Cllr_raw: 0.741	 Cllr_cal: 0.428	 Cllr_min_raw: 0.324	 Cllr_min_cal: 0.351	 best_num_iter: 4
+all
+Cllr_raw: 0.687	 Cllr_cal: 0.079	 Cllr_min_raw: 0.038	 Cllr_min_cal: 0.046	 best_num_iter: 4

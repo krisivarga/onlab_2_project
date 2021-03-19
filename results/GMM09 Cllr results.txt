@@ -1,0 +1,13 @@
+GMM09 Cllr results
+eI
+Cllr_raw: 0.662	 Cllr_cal: 0.370	 Cllr_min_raw: 0.238	 Cllr_min_cal: 0.259	 best_num_iter: 7
+oU
+Cllr_raw: 0.658	 Cllr_cal: 0.378	 Cllr_min_raw: 0.274	 Cllr_min_cal: 0.281	 best_num_iter: 5
+aI
+Cllr_raw: 0.608	 Cllr_cal: 0.427	 Cllr_min_raw: 0.322	 Cllr_min_cal: 0.346	 best_num_iter: 6
+aU
+Cllr_raw: 0.672	 Cllr_cal: 0.462	 Cllr_min_raw: 0.358	 Cllr_min_cal: 0.379	 best_num_iter: 7
+OI
+Cllr_raw: 0.716	 Cllr_cal: 0.384	 Cllr_min_raw: 0.291	 Cllr_min_cal: 0.304	 best_num_iter: 4
+all
+Cllr_raw: 0.685	 Cllr_cal: 0.107	 Cllr_min_raw: 0.056	 Cllr_min_cal: 0.060	 best_num_iter: 4

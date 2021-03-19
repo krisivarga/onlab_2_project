@@ -1,0 +1,13 @@
+GMM15 Cllr results
+aI
+Cllr_raw: 0.638	 Cllr_cal: 0.455	 Cllr_min_raw: 0.348	 Cllr_min_cal: 0.372	 best_num_iter: 6
+eI
+Cllr_raw: 0.713	 Cllr_cal: 0.384	 Cllr_min_raw: 0.259	 Cllr_min_cal: 0.275	 best_num_iter: 6
+oU
+Cllr_raw: 0.624	 Cllr_cal: 0.340	 Cllr_min_raw: 0.242	 Cllr_min_cal: 0.257	 best_num_iter: 9
+aU
+Cllr_raw: 0.683	 Cllr_cal: 0.489	 Cllr_min_raw: 0.410	 Cllr_min_cal: 0.420	 best_num_iter: 9
+OI
+Cllr_raw: 0.653	 Cllr_cal: 0.388	 Cllr_min_raw: 0.296	 Cllr_min_cal: 0.301	 best_num_iter: 9
+all
+Cllr_raw: 0.701	 Cllr_cal: 0.097	 Cllr_min_raw: 0.050	 Cllr_min_cal: 0.062	 best_num_iter: 4
