@@ -4,7 +4,6 @@
 % LR (score) output of MVKD2  are linearly calibrated to produce final LR output
 %
 % The procedure is symmetrical, but comparsions are restricted to the following:
-% comparisons are session 1 (suspect model) with session 2 (offender feat2_kicsi) [same as session 2 (suspect model) with session 1 (offender feat2_kicsi)]
 % for all same-speaker pairs, and all pairs of lower-numbered speaker (suspect) with higher numbered speaker (offender)
 % e.g., Speaker 1 (suspect) vs Speaker 2 (offender), but not Speaker 2 (suspect) with Speaker 1 (offender)
 %
