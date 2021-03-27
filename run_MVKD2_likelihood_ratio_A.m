@@ -4,21 +4,21 @@
 % LR (score) output of MVKD2  are linearly calibrated to produce final LR output
 %
 % The procedure is symmetrical, but comparsions are restricted to the following:
-% comparisons are session 1 (suspect model) with session 2 (offender feat2_kicsi) [same as session 2 (suspect model)with session 1 (offender feat2_kicsi)]
+% comparisons are session 1 (suspect model) with session 2 (offender data_kicsi) [same as session 2 (suspect model)with session 1 (offender data_kicsi)]
 % for all same-speaker pairs, and all pairs of lower-numbered speaker (suspect) with higher numbered speaker (offender)
 % e.g., Speaker 1 (suspect) vs Speaker 2 (offender), but not Speaker 2 (suspect) with Speaker 1 (offender)
 %
-% Two levels of cross-validation to ensure that feat2_kicsi from test speakers(s) is not used in training when calibrating and fusing
+% Two levels of cross-validation to ensure that data_kicsi from test speakers(s) is not used in training when calibrating and fusing
 %
-% feat2_kicsi are 3rd order DCT coefficients fitted to hertz-frequency original-time F2 trajectories
+% data_kicsi are 3rd order DCT coefficients fitted to hertz-frequency original-time F2 trajectories
 
 clear all
 addpath('.\m_files', '.\m_files\cllr\', '.\m_files\fusion\');
 
 % data sets
-%                1    2    3    4    5    6    
-vowel_labels = {'aI' 'eI' 'oU' 'aU' 'OI' 'all'};
-which_vowel = 1:5;
+%                      1        2             3            4     
+vowel_labels = {'formant_1' 'formant_2' 'formant_3' 'formant_all'};
+which_vowel = 1:4;
 
 num_vowels = length(which_vowel);
 
@@ -31,12 +31,12 @@ fprintf(fid, 'MVKD2 Cllr results\n');
 for I_vowel = which_vowel
     % load data
     load(['.\data\', vowel_labels{I_vowel}, '.mat'], 'Indices_Speakers', 'Indices_Sessions', 'data');    % speaker indices
-    speakerIDs = unique(spk_ids);
+    speakerIDs = unique(Indices_Speakers);
     numSpeakers = length(speakerIDs);
     
     % session indices
-    session_1_indices = session_ids == 1;
-    session_2_indices = session_ids == 2;
+    session_1_indices = Indices_Sessions == 1;
+    session_2_indices = Indices_Sessions == 2;
     
     % initiate variables
     num_comparisons = (numSpeakers^2 + numSpeakers)/2;
@@ -53,32 +53,32 @@ for I_vowel = which_vowel
     I_speaker_pair = 0;
     tic
     for Ispeaker_1 = 1:numSpeakers
-        % speaker 1 training feat2_kicsi (suspect)
-        IIspeaker_1 = spk_ids == speakerIDs(Ispeaker_1);
+        % speaker 1 training data_kicsi (suspect)
+        IIspeaker_1 = Indices_Speakers == speakerIDs(Ispeaker_1);
         II_train_1 = IIspeaker_1 & session_1_indices;
-        training_feat2_1 = feat2(II_train_1, :);
+        training_data_1 = data(II_train_1, :);
 
         for Ispeaker_2 = Ispeaker_1:numSpeakers
             fprintf('\nComparing speaker %0.0f against speaker %0.0f of %0.0f in data set all\n', Ispeaker_2, Ispeaker_1, numSpeakers)
             I_speaker_pair = I_speaker_pair + 1;
             
-            % speaker 2 test feat2_kicsi (offender)
-            IIspeaker_2 = spk_ids == speakerIDs(Ispeaker_2);
+            % speaker 2 test data_kicsi (offender)
+            IIspeaker_2 = Indices_Speakers == speakerIDs(Ispeaker_2);
             II_not_test_speakers = ~(IIspeaker_1 | IIspeaker_2);
             II_test_2 = IIspeaker_2 & session_2_indices;
-            test_feat2_2 = feat2(II_test_2, :);
+            test_data_2 = data(II_test_2, :);
             
-            % background feat2_kicsi (all other speakers)
-            background_feat2i = feat2(II_not_test_speakers, :);
-            background_speaker_index = spk_ids(II_not_test_speakers);
-            background_session_index = session_ids(II_not_test_speakers);
+            % background data_kicsi (all other speakers)
+            background_data = data(II_not_test_speakers, :);
+            background_speaker_index = Indices_Speakers(II_not_test_speakers);
+            background_session_index = Indices_Sessions(II_not_test_speakers);
             
             % MVKD2
-            scores_raw(I_speaker_pair) = multivar_kernel_LR(training_feat2_1, test_feat2_2, background_feat2, background_speaker_index);
+            scores_raw(I_speaker_pair) = multivar_kernel_LR(training_data_1, test_data_2, background_data, background_speaker_index);
             log_scores(I_speaker_pair) = log(scores_raw(I_speaker_pair));
             
-            % calibrate using cross-validated scores from background feat2_kicsi
-            [log_scores_train_LogReg_ss{I_speaker_pair}, log_scores_train_LogReg_ds{I_speaker_pair}] = mvkd2_for_LogReg_train(background_feat2, background_speaker_index, background_session_index);
+            % calibrate using cross-validated scores from background data_kicsi
+            [log_scores_train_LogReg_ss{I_speaker_pair}, log_scores_train_LogReg_ds{I_speaker_pair}] = mvkd2_for_LogReg_train(background_data, background_speaker_index, background_session_index);
             % calculate calibration weights (handle cases of complete separation)
             weights = train_llr_fusion_robust(log_scores_train_LogReg_ss{I_speaker_pair}', log_scores_train_LogReg_ds{I_speaker_pair}', 0.5, 0.001);
             % calibrate
@@ -87,7 +87,7 @@ for I_vowel = which_vowel
             % comparison indices
             Indices_comparisons(I_speaker_pair, :) = [Ispeaker_1, Ispeaker_2];
             
-            % estimated time to completion for this feat2_kicsi set
+            % estimated time to completion for this data_kicsi set
             num_speaker_pairs_left = (num_comparisons - I_speaker_pair);
             elapsed_time = toc;
             est_completion_time = now + (elapsed_time * num_speaker_pairs_left / I_speaker_pair /86400); % 86400 = 24*60*60 i.e. number of seconds in a day
