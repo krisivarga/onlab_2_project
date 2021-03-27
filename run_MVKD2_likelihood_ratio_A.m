@@ -31,7 +31,7 @@ fprintf(fid, 'MVKD2 Cllr results\n');
 
     % load feat2_kicsi
     %load(['.\feat2_kicsi\', vowel_labels{I_vowel}, '.mat'], 'spk_ids_kicsi', 'session_ids_kicsi', 'feat2_kicsi');
-    load(['.\data\teszt1.mat'],'spk_ids_kicsi', 'session_ids_kicsi','feat2_kicsi');
+    load(['.\data\teszt2.mat'],'spk_ids_kicsi', 'session_ids_kicsi','feat2_kicsi');
     % speaker indices
     speakerIDs = unique(spk_ids_kicsi);
     numSpeakers = length(speakerIDs);
