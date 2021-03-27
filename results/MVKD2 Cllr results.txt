@@ -1,13 +1,1 @@
 MVKD2 Cllr results
-aI
-Cllr_raw: 0.910	 Cllr_cal: 0.440	 Cllr_min_raw: 0.297	 Cllr_min_cal: 0.322
-eI
-Cllr_raw: 0.296	 Cllr_cal: 0.329	 Cllr_min_raw: 0.229	 Cllr_min_cal: 0.240
-oU
-Cllr_raw: 0.326	 Cllr_cal: 0.401	 Cllr_min_raw: 0.218	 Cllr_min_cal: 0.231
-aU
-Cllr_raw: 0.328	 Cllr_cal: 0.338	 Cllr_min_raw: 0.273	 Cllr_min_cal: 0.285
-OI
-Cllr_raw: 0.365	 Cllr_cal: 0.419	 Cllr_min_raw: 0.284	 Cllr_min_cal: 0.307
-fused
-		Cllr_fused: 0.218	 Cllr_min_fused: 0.100

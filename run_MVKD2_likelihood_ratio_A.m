@@ -16,9 +16,9 @@ clear all
 addpath('.\m_files', '.\m_files\cllr\', '.\m_files\fusion\');
 
 % data sets
-%                1    2    3    4    5    6    
-vowel_labels = {'aI' 'eI' 'oU' 'aU' 'OI' 'all'};
-which_vowel = 1:5;
+%                     1            2          3            4  
+vowel_labels = {'formant_1' 'formant_2' 'formant_3' 'formant_all'};
+which_vowel = 1:3;
 
 num_vowels = length(which_vowel);
 

@@ -1,0 +1,10 @@
+data_all_raw = readtable('features_torolt.csv');
+
+for c= 1:4
+    Indices_Session_t = data_all_raw(:,3);
+    indices_Speakers_t = data_all_raw(:,2);
+    data_t = data_all_raw(:,5+(c-1)*4:5+3+(c-1)*4);
+    filename = ['data_', c+1, '.txt'];
+    save(filename, 'Indices_Session_t','-ascii');
+    
+end
