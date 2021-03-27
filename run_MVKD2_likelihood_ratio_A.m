@@ -12,31 +12,25 @@
 %
 % feat2_kicsi are 3rd order DCT coefficients fitted to hertz-frequency original-time F2 trajectories
 
-%clear all
+clear all
 addpath('.\m_files', '.\m_files\cllr\', '.\m_files\fusion\');
 
-% feat2_kicsi sets
+% data sets
 %                1    2    3    4    5    6    
-%vowel_labels = {'aI' 'eI' 'oU' 'aU' 'OI' 'all'};
-%which_vowel = 1:5;
+vowel_labels = {'aI' 'eI' 'oU' 'aU' 'OI' 'all'};
+which_vowel = 1:5;
 
-%um_vowels = length(which_vowel);
+num_vowels = length(which_vowel);
 
 % output to txt file
 text_output_file = '.\results\MVKD2 Cllr results.txt';
 fid = fopen(text_output_file, 'wt');
 fprintf(fid, 'MVKD2 Cllr results\n');
 
-% cycle through the feat2_kicsi sets
-
-    % load feat2_kicsi
-    %load(['.\feat2_kicsi\', vowel_labels{I_vowel}, '.mat'], 'spk_ids_kicsi', 'session_ids_kicsi', 'feat2_kicsi');
-<<<<<<< HEAD
-    load(['.\data\teszt2.mat'],'spk_ids_kicsi', 'session_ids_kicsi','feat2_kicsi');
-=======
-    load('.\data\forvoice_data2.mat','spk_ids', 'session_ids','feat2');
->>>>>>> 8e74edae78bdf6841fc9d90d1493930e46ce0bd7
-    % speaker indices
+% cycle through the data sets
+for I_vowel = which_vowel
+    % load data
+    load(['.\data\', vowel_labels{I_vowel}, '.mat'], 'Indices_Speakers', 'Indices_Sessions', 'data');    % speaker indices
     speakerIDs = unique(spk_ids);
     numSpeakers = length(speakerIDs);
     
@@ -128,6 +122,7 @@ fprintf(fid, 'MVKD2 Cllr results\n');
     saveas(gcf, ['.\plots\', save_name, '.fig']);
 
 
+end
 % clean up
 rmpath('.\m_files', '.\m_files\cllr\', '.\m_files\fusion\');
 fclose(fid);
