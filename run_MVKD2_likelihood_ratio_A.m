@@ -4,7 +4,7 @@
 % LR (score) output of MVKD2  are linearly calibrated to produce final LR output
 %
 % The procedure is symmetrical, but comparsions are restricted to the following:
-% comparisons are session 1 (suspect model) with session 2 (offender feat2_kicsi) [same as session 2 (suspect model) with session 1 (offender feat2_kicsi)]
+% comparisons are session 1 (suspect model) with session 2 (offender feat2_kicsi) [same as session 2 (suspect model)with session 1 (offender feat2_kicsi)]
 % for all same-speaker pairs, and all pairs of lower-numbered speaker (suspect) with higher numbered speaker (offender)
 % e.g., Speaker 1 (suspect) vs Speaker 2 (offender), but not Speaker 2 (suspect) with Speaker 1 (offender)
 %
@@ -31,14 +31,18 @@ fprintf(fid, 'MVKD2 Cllr results\n');
 
     % load feat2_kicsi
     %load(['.\feat2_kicsi\', vowel_labels{I_vowel}, '.mat'], 'spk_ids_kicsi', 'session_ids_kicsi', 'feat2_kicsi');
+<<<<<<< HEAD
     load(['.\data\teszt2.mat'],'spk_ids_kicsi', 'session_ids_kicsi','feat2_kicsi');
+=======
+    load('.\data\forvoice_data2.mat','spk_ids', 'session_ids','feat2');
+>>>>>>> 8e74edae78bdf6841fc9d90d1493930e46ce0bd7
     % speaker indices
-    speakerIDs = unique(spk_ids_kicsi);
+    speakerIDs = unique(spk_ids);
     numSpeakers = length(speakerIDs);
     
     % session indices
-    session_1_indices = session_ids_kicsi == 1;
-    session_2_indices = session_ids_kicsi == 2;
+    session_1_indices = session_ids == 1;
+    session_2_indices = session_ids == 2;
     
     % initiate variables
     num_comparisons = (numSpeakers^2 + numSpeakers)/2;
@@ -56,31 +60,31 @@ fprintf(fid, 'MVKD2 Cllr results\n');
     tic
     for Ispeaker_1 = 1:numSpeakers
         % speaker 1 training feat2_kicsi (suspect)
-        IIspeaker_1 = spk_ids_kicsi == speakerIDs(Ispeaker_1);
+        IIspeaker_1 = spk_ids == speakerIDs(Ispeaker_1);
         II_train_1 = IIspeaker_1 & session_1_indices;
-        training_feat2_kicsi_1 = feat2_kicsi(II_train_1, :);
+        training_feat2_1 = feat2(II_train_1, :);
 
         for Ispeaker_2 = Ispeaker_1:numSpeakers
             fprintf('\nComparing speaker %0.0f against speaker %0.0f of %0.0f in data set all\n', Ispeaker_2, Ispeaker_1, numSpeakers)
             I_speaker_pair = I_speaker_pair + 1;
             
             % speaker 2 test feat2_kicsi (offender)
-            IIspeaker_2 = spk_ids_kicsi == speakerIDs(Ispeaker_2);
+            IIspeaker_2 = spk_ids == speakerIDs(Ispeaker_2);
             II_not_test_speakers = ~(IIspeaker_1 | IIspeaker_2);
             II_test_2 = IIspeaker_2 & session_2_indices;
-            test_feat2_kicsi_2 = feat2_kicsi(II_test_2, :);
+            test_feat2_2 = feat2(II_test_2, :);
             
             % background feat2_kicsi (all other speakers)
-            background_feat2_kicsi = feat2_kicsi(II_not_test_speakers, :);
-            background_speaker_index = spk_ids_kicsi(II_not_test_speakers);
-            background_session_index = session_ids_kicsi(II_not_test_speakers);
+            background_feat2i = feat2(II_not_test_speakers, :);
+            background_speaker_index = spk_ids(II_not_test_speakers);
+            background_session_index = session_ids(II_not_test_speakers);
             
             % MVKD2
-            scores_raw(I_speaker_pair) = multivar_kernel_LR(training_feat2_kicsi_1, test_feat2_kicsi_2, background_feat2_kicsi, background_speaker_index);
+            scores_raw(I_speaker_pair) = multivar_kernel_LR(training_feat2_1, test_feat2_2, background_feat2, background_speaker_index);
             log_scores(I_speaker_pair) = log(scores_raw(I_speaker_pair));
             
             % calibrate using cross-validated scores from background feat2_kicsi
-            [log_scores_train_LogReg_ss{I_speaker_pair}, log_scores_train_LogReg_ds{I_speaker_pair}] = mvkd2_for_LogReg_train(background_feat2_kicsi, background_speaker_index, background_session_index);
+            [log_scores_train_LogReg_ss{I_speaker_pair}, log_scores_train_LogReg_ds{I_speaker_pair}] = mvkd2_for_LogReg_train(background_feat2, background_speaker_index, background_session_index);
             % calculate calibration weights (handle cases of complete separation)
             weights = train_llr_fusion_robust(log_scores_train_LogReg_ss{I_speaker_pair}', log_scores_train_LogReg_ds{I_speaker_pair}', 0.5, 0.001);
             % calibrate
