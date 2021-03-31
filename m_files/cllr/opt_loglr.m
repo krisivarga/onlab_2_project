@@ -130,7 +130,7 @@ end;
 state = warning;
 warning off;  % otherwise 'raw' option would produce 'log(0)' warnings
 posterior_log_odds = log(Popt)-log(1-Popt);
-eval(['warning ',state]); % restore previous warning state
+eval(['warning ',state.state]); % restore previous warning state
 log_prior_odds = log((Nt)/(Nn)); 
 llrs = posterior_log_odds - log_prior_odds;
 

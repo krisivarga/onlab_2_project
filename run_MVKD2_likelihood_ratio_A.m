@@ -18,7 +18,7 @@ addpath('.\m_files', '.\m_files\cllr\', '.\m_files\fusion\');
 % data sets
 %                      1        2             3            4     
 vowel_labels = {'formant_1' 'formant_2' 'formant_3' 'formant_all'};
-which_vowel = 1:4;
+which_vowel = 4;
 
 num_vowels = length(which_vowel);
 
@@ -103,8 +103,8 @@ for I_vowel = which_vowel
     % calculate Cllr
     Cllr_raw = cllr(log_scores(II_ss), log_scores(II_ds));
     Cllr_cal = cllr(log_LR_cal(II_ss), log_LR_cal(II_ds));
-    Cllr_min_raw = min_cllr(log_scores(II_ss), log_scores(II_ds));
-    Cllr_min_cal = min_cllr(log_LR_cal(II_ss), log_LR_cal(II_ds));
+    Cllr_min_raw = min_cllr(log_scores(II_ss).', log_scores(II_ds).');
+    Cllr_min_cal = min_cllr(log_LR_cal(II_ss).', log_LR_cal(II_ds).');
     
     % Tippett plot
     plot_name = ['MVKD2 ', vowel_labels{I_vowel}];
