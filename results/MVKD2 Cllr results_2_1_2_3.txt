@@ -1,0 +1,7 @@
+MVKD2 Cllr results
+formant_1
+Cllr_raw: 1.090	 Cllr_cal: 0.750	 Cllr_min_raw: 0.598	 Cllr_min_cal: 0.601
+formant_2
+Cllr_raw: 0.632	 Cllr_cal: 0.536	 Cllr_min_raw: 0.478	 Cllr_min_cal: 0.483
+formant_3
+Cllr_raw: 0.842	 Cllr_cal: 0.564	 Cllr_min_raw: 0.504	 Cllr_min_cal: 0.509

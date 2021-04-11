@@ -53,7 +53,7 @@ for I_vowel = which_vowel
     I_speaker_pair = 0;
     tic
     for Ispeaker_1 = 1:numSpeakers
-        % speaker 1 training data_kicsi (suspect)
+        % speaker 1 training data_kicsi (suspect)   --maradék 20 session 1 
         IIspeaker_1 = Indices_Speakers == speakerIDs(Ispeaker_1);
         II_train_1 = IIspeaker_1 & session_1_indices;
         training_data_1 = data(II_train_1, :);
@@ -62,13 +62,13 @@ for I_vowel = which_vowel
             fprintf('\nComparing speaker %0.0f against speaker %0.0f of %0.0f in data set all\n', Ispeaker_2, Ispeaker_1, numSpeakers)
             I_speaker_pair = I_speaker_pair + 1;
             
-            % speaker 2 test data_kicsi (offender)
+            % speaker 2 test data_kicsi (offender)   maradék 20 session 2
             IIspeaker_2 = Indices_Speakers == speakerIDs(Ispeaker_2);
             II_not_test_speakers = ~(IIspeaker_1 | IIspeaker_2);
             II_test_2 = IIspeaker_2 & session_2_indices;
             test_data_2 = data(II_test_2, :);
             
-            % background data_kicsi (all other speakers)
+            % background data (all other speakers) -------------
             background_data = data(II_not_test_speakers, :);
             background_speaker_index = Indices_Speakers(II_not_test_speakers);
             background_session_index = Indices_Sessions(II_not_test_speakers);
@@ -77,9 +77,11 @@ for I_vowel = which_vowel
             scores_raw(I_speaker_pair) = multivar_kernel_LR(training_data_1, test_data_2, background_data, background_speaker_index);
             log_scores(I_speaker_pair) = log(scores_raw(I_speaker_pair));
             
-            % calibrate using cross-validated scores from background data_kicsi
+            % calibrate using cross-validated scores from background
+            % data_kicsi-------------
             [log_scores_train_LogReg_ss{I_speaker_pair}, log_scores_train_LogReg_ds{I_speaker_pair}] = mvkd2_for_LogReg_train(background_data, background_speaker_index, background_session_index);
-            % calculate calibration weights (handle cases of complete separation)
+            % calculate calibration weights (handle cases of complete
+            % separation) ---------------
             weights = train_llr_fusion_robust(log_scores_train_LogReg_ss{I_speaker_pair}', log_scores_train_LogReg_ds{I_speaker_pair}', 0.5, 0.001);
             % calibrate
             log_LR_cal(I_speaker_pair) = lin_fusion(weights, log_scores(I_speaker_pair)');
