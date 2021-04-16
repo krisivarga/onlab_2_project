@@ -1,0 +1,12 @@
+MVKD2 Cllr results
+all_recordings
+Cllr_raw: 0.345	 Cllr_cal: 0.855	 Cllr_min_raw: 0.125	 Cllr_min_cal: 0.125
+
+task_1_recordings
+Cllr_raw: 0.228	 Cllr_cal: 0.524	 Cllr_min_raw: 0.000	 Cllr_min_cal: 0.000
+
+task_2_recordings
+Cllr_raw: 0.291	 Cllr_cal: 0.429	 Cllr_min_raw: 0.073	 Cllr_min_cal: 0.073
+
+task_3_recordings
+Cllr_raw: 0.174	 Cllr_cal: 0.319	 Cllr_min_raw: 0.044	 Cllr_min_cal: 0.044
